@@ -5,6 +5,19 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
 
+{-- TODO Suggestions:
+1. If no results, show "nothing found"
+2. Fuzzy search
+    a. http://package.elm-lang.org/packages/NoRedInk/elm-simple-fuzzy/1.0.2/Simple-Fuzzy
+    b. http://package.elm-lang.org/packages/tripokey/elm-fuzzy/5.2.0/Fuzzy
+3. Change list results to links
+4. Disable search if nothing in field input box
+    a. show error message
+--}
+
+meetupList : List String
+meetupList = ["elm-la", "elm-oc", "rust", "golang"]
+
 main =
     Html.beginnerProgram
         { model = init
@@ -48,10 +61,9 @@ update msg model =
         Search ->
             { model | results = search model.searchString }
 
-
 search : String -> List String
 search input =
-    [ "elm-la", "elm-oc" ]
+    List.filter (String.contains input) meetupList
 
 
 
